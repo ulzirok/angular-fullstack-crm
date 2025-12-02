@@ -1,13 +1,19 @@
 const express = require('express'); //подключаем файл express
 const app = express(); //создаем сервер (экзепляр фреймворка express)
 const bodyParser = require('body-parser') //для парсинга данных
-const cors = require('cors') //для обработки CORS-запросов
+const cors = require('cors'); //для обработки CORS-запросов
+const mongoose = require('mongoose')
+const keys = require('./config/keys')
 
 const authRoutes = require('./routes/auth');
 const analyticsRoutes = require('./routes/analytics');
 const categoryRoutes = require('./routes/category');
 const orderRoutes = require('./routes/order');
 const positionRoutes = require('./routes/position');
+
+mongoose.connect(keys.mongoURI)
+.then(() => console.log('Mongodb connected'))
+.catch((err) => console.log(err))
 
 app.use(require('morgan')('dev'))
 app.use(cors())
