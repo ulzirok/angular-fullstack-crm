@@ -1,14 +1,19 @@
 const express = require('express'); //подключаем файл express
 const app = express(); //создаем сервер (экзепляр фреймворка express)
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser') //для парсинга данных
+const cors = require('cors') //для обработки CORS-запросов
+
 const authRoutes = require('./routes/auth');
 const analyticsRoutes = require('./routes/analytics');
 const categoryRoutes = require('./routes/category');
 const orderRoutes = require('./routes/order');
 const positionRoutes = require('./routes/position');
 
+app.use(require('morgan')('dev'))
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
 app.use('/api/auth', authRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/category', categoryRoutes);
