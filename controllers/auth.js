@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User');
 const keys = require('../config/keys')
+const errorHandler = require('../utils/errorHandler')
 
 module.exports.register = async function (req, res) {
   const candidate = await User.findOne({ email: req.body.email }); //в БД ищем есть ли пользователь с таким email (ч/з mongoose)
@@ -24,7 +25,7 @@ module.exports.register = async function (req, res) {
       res.status(201).json(user); //клиенту вернем объект 201
     }
     catch (err) { //если БД не отвечает
-      //Обработать ошибку 
+      errorHandler(res, err); //клиенту вернем ошибку 500
     }
   }
 };

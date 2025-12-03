@@ -15,7 +15,7 @@ module.exports = passport => {
     new JwtStrategy(options, async (payload, done) => {
       const user = await User.findById(payload.userId).select('email id'); //в БД ищем пользователя
       try {
-        if (user) { //если есть, добавляем данные к запросам
+        if (user) { //если есть, добавляем данные к запросам (т.е. user в объект req)
           done(null, user);
         }
         else { //если нет, ничего не добавляем
