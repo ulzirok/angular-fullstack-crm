@@ -8,7 +8,8 @@ import { LoginPage } from './login-page/login-page';
 import { AuthLayout } from './shared/layouts/auth-layout/auth-layout';
 import { SiteLayout } from './shared/layouts/site-layout/site-layout';
 import { RegisterPage } from './register-page/register-page';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { TokenInteceptor } from './shared/classes/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,11 +23,16 @@ import { provideHttpClient } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideHttpClient()
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInteceptor
+    }
   ],
   bootstrap: [App]
 })

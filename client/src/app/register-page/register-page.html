@@ -1,16 +1,34 @@
-<div class="card">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
   <div class="card-content">
     <span class="card-title">Создать аккаунт</span>
     <div class="input-field">
-      <input id="email" type="email" required>
+      <input formControlName="email" [ngClass]="{'invalid': form.get('email')?.invalid && form.get('email')?.touched}" id="email" type="email">
       <label for="email">Email:</label>
+      @if(form.get('email')?.invalid && form.get('email')?.touched) {
+        <span class="helper-text red-text">
+          @if(form.get('email')?.errors?.['required']) {
+          <span >Email не должен быть пустым</span>
+          }
+          @if(form.get('email')?.errors?.['email']) {
+          <span >Введите корректный email адрес</span>
+          }
+        </span>
+      }
     </div>
     <div class="input-field">
-      <input id="password" type="password" required>
+      <input formControlName="password" id="password" [ngClass]="{'invalid': form.get('password')?.invalid && form.get('password')?.touched}" type="password">
       <label for="password">Пароль:</label>
+      @if(form.get('password')?.invalid && form.get('password')?.touched) {
+        <span class="helper-text red-text">
+          @if( form.get('password')?.errors?.['required']) {
+          <span >Пароль не должен быть пустым</span>
+          }
+        </span>
+      }
+      
     </div>
   </div>
   <div class="card-action">
-    <button class="modal-action btn waves-effect">Создать</button>
+    <button [disabled]="form.invalid || form.disabled" type="submit" class="modal-action btn waves-effect">Создать</button>
   </div>
-</div>
+</form>

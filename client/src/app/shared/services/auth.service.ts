@@ -7,38 +7,38 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private token: string | null = null
-  private http = inject(HttpClient)
-  
-  login(user: IUser): Observable<{token: string}> {
+  private token: string = '';
+  private http = inject(HttpClient);
+
+  login(user: IUser): Observable<{ token: string; }> {
     return this.http.post<{ token: string; }>('/api/auth/login', user).pipe(
       tap(
         ({ token }) => {
-          localStorage.setItem('auth-token', token)
-          this.setToken(token)
+          localStorage.setItem('auth-token', token);
+          this.setToken(token);
         }
       )
-    )
+    );
   }
-  
-  setToken(token: string | null) {
-    this.token = token
+
+  setToken(token: string) {
+    this.token = token;
   }
-  
-  getToken(): string | null {
-    return this.token
+
+  getToken(): string {
+    return this.token;
   }
-  
+
   isAuthenticated(): boolean {
-    return !!this.token
+    return !!this.token;
   }
-  
-  register() {
-    
+
+  register(user: IUser): Observable<IUser> {
+    return this.http.post<IUser>('/api/auth/register', user);
   }
-  
+
   logout() {
-    this.setToken(null)
-    localStorage.clear()
+    this.setToken('');
+    localStorage.clear();
   }
 }

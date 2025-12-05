@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MaterialService } from '../shared/classes/material.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,43 +12,46 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrl: './login-page.scss',
 })
 export class LoginPage implements OnInit, OnDestroy {
-  form!: FormGroup
-  aSub!: Subscription
-  private authService = inject(AuthService)
-  private router = inject(Router)
-  private route = inject(ActivatedRoute)
-  
+  form!: FormGroup;
+  aSub!: Subscription;
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
   onSubmit() {
-    this.form.disable()
+    // this.form.disable();
     this.aSub = this.authService.login(this.form.value).subscribe(
       () => this.router.navigate(['/overview']),
       (err) => {
-        console.warn(err);
-        this.form.enable()
+        MaterialService.toast(err.error.message)
+        // this.form.enable();
       }
-      
-    )
+
+    );
   }
-  
+
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl('user@mail.com', [Validators.email, Validators.required]),
-      password: new FormControl('123', [Validators.required])
-    })
-    
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', [Validators.required])
+    });
+
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
-        //Теперь вы можете зайти в систему используя свои данные
+        MaterialService.toast('Теперь вы можете зайти в систему используя свои данные')
       }
       else if (params['accessDenied']) {
-        //Для начала авторизуйтесь в системе
+        MaterialService.toast('Для начала авторизуйтесь в системе')
       }
-    })
+      else if (params['sessionFailed']) {
+        MaterialService.toast('Пожалуйста войдите в систему заново')
+      }
+    });
   }
-  
+
   ngOnDestroy(): void {
     if (this.aSub) {
-      this.aSub.unsubscribe()
+      this.aSub.unsubscribe();
     }
   }
 }
