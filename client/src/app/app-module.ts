@@ -10,6 +10,11 @@ import { SiteLayout } from './shared/layouts/site-layout/site-layout';
 import { RegisterPage } from './register-page/register-page';
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { TokenInteceptor } from './shared/classes/token.interceptor';
+import { OverviewPage } from './overview-page/overview-page';
+import { AnalyticsPage } from './analytics-page/analytics-page';
+import { HistoryPage } from './history-page/history-page';
+import { OrderPage } from './order-page/order-page';
+import { CategoriesPage } from './categories-page/categories-page';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,12 @@ import { TokenInteceptor } from './shared/classes/token.interceptor';
     LoginPage,
     AuthLayout,
     SiteLayout,
-    RegisterPage
+    RegisterPage,
+    OverviewPage,
+    AnalyticsPage,
+    HistoryPage,
+    OrderPage,
+    CategoriesPage
   ],
   imports: [
     BrowserModule,
