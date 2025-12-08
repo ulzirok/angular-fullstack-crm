@@ -1,1 +1,32 @@
-<p>categories-page works!</p>
+
+  <div class="page-title">
+    <h4>Категории</h4>
+    <button routerLink="/categories/new" class="waves-effect waves-light btn grey darken-1">Добавить категорию</button>
+  </div>
+
+  @if (!loading()) {
+    <div class="row">
+      <div class="col s12">
+        @if (categories.length !== 0) {
+          <div class="collection">
+            @for (category of categories; track $index) {
+            <a [routerLink]="['/categories', category._id]" class="collection-item">{{category.name}}</a>
+            }
+          </div>
+        }
+        @else {
+          <ng-template>
+            <div class="center">
+              У вас нет ни одной категории
+            </div>
+          </ng-template>
+        }
+      </div>
+    </div>
+  }
+  @else {
+    <app-loader></app-loader>
+  }
+  
+
+

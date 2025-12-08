@@ -10,6 +10,7 @@ import { AnalyticsPage } from './analytics-page/analytics-page';
 import { HistoryPage } from './history-page/history-page';
 import { OrderPage } from './order-page/order-page';
 import { CategoriesPage } from './categories-page/categories-page';
+import { CategoriesForm } from './categories-page/categories-form/categories-form';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,7 +27,9 @@ const routes: Routes = [
       { path: 'analytics', component: AnalyticsPage},
       {path: 'history', component: HistoryPage},
       {path: 'order', component: OrderPage},
-      {path: 'categories', component: CategoriesPage}
+      {path: 'categories', component: CategoriesPage},
+      {path: 'categories/new', component: CategoriesForm},
+      {path: 'categories/:id', component: CategoriesForm}
     ]
   }
 ];
