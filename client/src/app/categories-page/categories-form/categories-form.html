@@ -6,9 +6,11 @@
       {{isNew ? 'Добавить' : 'Редактировать'}} категорию
     </h4>
     <span>
-      <button class="btn btn-small red">
-        <i class="material-icons">delete</i>
-      </button>
+      @if(!isNew) {
+        <button class="btn btn-small red" (click)="deleteCategory()">
+          <i class="material-icons">delete</i>
+        </button>
+      }
     </span>
   </div>
 
@@ -20,7 +22,7 @@
         @if (form.get('name')?.invalid && form.get('name')?.touched) {
           <span class="helper-text red-text">
             @if (form.get('name')?.errors?.['required']) {
-              <span>Имя категории не можут быть пустым</span>
+              <span>Имя категории не может быть пустым</span>
             }
           </span>
         }
