@@ -11,25 +11,32 @@ import { HistoryPage } from './history-page/history-page';
 import { OrderPage } from './order-page/order-page';
 import { CategoriesPage } from './categories-page/categories-page';
 import { CategoriesForm } from './categories-page/categories-form/categories-form';
+import { OrderCategories } from './order-page/order-categories/order-categories';
+import { OrderPositions } from './order-page/order-positions/order-positions';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: '', component: AuthLayout,
     children: [
-      {path: 'login', component: LoginPage},
-      {path: 'register', component: RegisterPage}
+      { path: 'login', component: LoginPage },
+      { path: 'register', component: RegisterPage }
     ]
   },
   {
     path: '', component: SiteLayout, canActivate: [AuthGuard], children: [
-      {path: 'overview', component: OverviewPage},
-      { path: 'analytics', component: AnalyticsPage},
-      {path: 'history', component: HistoryPage},
-      {path: 'order', component: OrderPage},
-      {path: 'categories', component: CategoriesPage},
-      {path: 'categories/new', component: CategoriesForm},
-      {path: 'categories/:id', component: CategoriesForm}
+      { path: 'overview', component: OverviewPage },
+      { path: 'analytics', component: AnalyticsPage },
+      { path: 'history', component: HistoryPage },
+      {
+        path: 'order', component: OrderPage, children: [
+          { path: '', component: OrderCategories },
+          { path: ':id', component: OrderPositions }
+        ]
+      },
+      { path: 'categories', component: CategoriesPage },
+      { path: 'categories/new', component: CategoriesForm },
+      { path: 'categories/:id', component: CategoriesForm }
     ]
   }
 ];

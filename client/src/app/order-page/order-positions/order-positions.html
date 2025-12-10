@@ -1,0 +1,40 @@
+@if (positions$|async) {
+@if((positions$|async)?.length !== 0) {
+<table class="highlight">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Стоимость</th>
+      <th>Количество</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (position of positions$ | async; track $index) {
+    <tr>
+      <td>{{position.name}}</td>
+      <td>{{position.cost}} $</td>
+      <td>
+        <div class="input-field inline order-position-input">
+          <input [(ngModel)]="position.quantity" type="number" value="1" min="1">
+        </div>
+      </td>
+      <td>
+        <button (click)="addToOrder(position)" [disabled]="!position.quantity" class="btn waves-effect wavers-light btn-small">Добавить</button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+}
+@else {
+<div class="center">
+  В данной категории пока нет позиций
+</div>
+}
+}
+@else {
+<app-loader></app-loader>
+}

@@ -23,7 +23,6 @@ export class CategoriesPage implements OnInit {
     this.categoriesService.get().subscribe(categories => {
       this.loading.set(false);
       this.categories = categories;
-      console.log(categories);
     });
   }
   

@@ -18,6 +18,8 @@ import { CategoriesPage } from './categories-page/categories-page';
 import { Loader } from './shared/components/loader/loader';
 import { CategoriesForm } from './categories-page/categories-form/categories-form';
 import { PositionsForm } from './categories-page/categories-form/positions-form/positions-form';
+import { OrderCategories } from './order-page/order-categories/order-categories';
+import { OrderPositions } from './order-page/order-positions/order-positions';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { PositionsForm } from './categories-page/categories-form/positions-form/
     CategoriesPage,
     Loader,
     CategoriesForm,
-    PositionsForm
+    PositionsForm,
+    OrderCategories,
+    OrderPositions
   ],
   imports: [
     BrowserModule,
