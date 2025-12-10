@@ -29,17 +29,30 @@ module.exports.create = async function (req, res) {
   }
 };
 
+// module.exports.remove = async function (req, res) {
+//   try {
+//     await Position.remove({ _id: req.params.id })
+//     res.status(200).json({
+//       message: 'Позиция была удалена'
+//     })
+//   }
+//   catch (err) {
+//     errorHanler(res, err);
+//   }
+// };
 module.exports.remove = async function (req, res) {
   try {
-    await Position.remove({ _id: req.params.id })
-    res.status(200).json({
-      message: 'Позиция была удалена'
-    })
-  }
-  catch (err) {
+    const deleted = await Position.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ message: 'Позиция не найдена' });
+    }
+    res.status(200).json({ message: 'Позиция была удалена' });
+  } catch (err) {
+    console.error(err);
     errorHanler(res, err);
   }
 };
+
 
 module.exports.update = async function (req, res) {
   try {

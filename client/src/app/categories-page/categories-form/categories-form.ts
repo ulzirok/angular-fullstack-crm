@@ -20,7 +20,7 @@ export class CategoriesForm implements OnInit {
   isNew: boolean = true;
   form!: FormGroup;
   image!: File;
-  imagePreview: any = '';
+  imagePreview?: any = '';
   category?: ICategory;
   @ViewChild('input') inputRef!: ElementRef<HTMLInputElement>;
 

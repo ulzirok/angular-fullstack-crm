@@ -50,6 +50,8 @@
     </div>
   </div>
 
-  <!-- <app-positions-form></app-positions-form> -->
+  @if(category?._id) {
+    <app-positions-form [categoryId]="category?._id"></app-positions-form>
+  }
 
 
