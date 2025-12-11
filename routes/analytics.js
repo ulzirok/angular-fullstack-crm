@@ -1,5 +1,5 @@
 const express = require('express');
-const password = require('passport')
+const passport = require('passport')
 const controller = require('../controllers/analytics');
 const router = express.Router();
 
