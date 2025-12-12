@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { IOverviewPage } from "../interfaces";
+import { IAnalyticsPage, IOverviewPage } from "../interfaces";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class AnalyticsService implements OnInit{
     return this.http.get<IOverviewPage>('/api/analytics/overview')
   }
   
-  getAnalytics() {
-    
+  getAnalytics(): Observable<IAnalyticsPage> {
+    return this.http.get<IAnalyticsPage>('/api/analytics/analytics')
   }
 }

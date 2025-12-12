@@ -56,3 +56,14 @@ export interface IOverviewPageItem {
   yesterday: number,
   isHigher: boolean
 }
+
+export interface IAnalyticsPage {
+  average: number,
+  chart: IAnalyticsChartItem[];
+}
+
+export interface IAnalyticsChartItem {
+  gain: number,
+  order: number,
+  label: string;
+}
