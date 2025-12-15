@@ -1,6 +1,6 @@
 # Проект CRM-системы - (Учебный проект)
 
-- представляет собой **CRM-приложение**, где фронтенд написан на **Angular**, а бэкенд — на **Node.js/Express/MongoDB (Mongoose)**.
+представляет собой **CRM-приложение**, где фронтенд написан на **Angular**, а бэкенд — на **Node.js/Express/MongoDB (Mongoose)**.
 
 ## Ссылка: https://astounding-queijadas-f49ea3.netlify.app/login
 
