@@ -17,7 +17,7 @@ export class CategoriesService {
         // Добавляем полный URL к imageSrc для каждой категории
         return categories.map(category => {
           if (category.imageSrc && !category.imageSrc.startsWith('http')) {
-            category.imageSrc = this.baseUrl + category.imageSrc;
+            category.imageSrc = this.baseUrl + '/' + category.imageSrc;
           }
           return category;
         });
@@ -30,7 +30,7 @@ export class CategoriesService {
       map(category => {
         // Добавляем полный URL к imageSrc для одной категории, полученной по ID
         if (category.imageSrc && !category.imageSrc.startsWith('http')) {
-          category.imageSrc = this.baseUrl + category.imageSrc;
+          category.imageSrc = this.baseUrl + '/' + category.imageSrc;
         }
         return category;
       })
