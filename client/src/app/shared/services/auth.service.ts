@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { IUser } from '../interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class AuthService {
   private http = inject(HttpClient);
 
   login(user: IUser): Observable<{ token: string; }> {
-    return this.http.post<{ token: string; }>('/api/auth/login', user).pipe(
+    return this.http.post<{ token: string; }>(`${environment.apiUrl}/auth/login`, user).pipe(
       tap(
         ({ token }) => {
           localStorage.setItem('auth-token', token);
@@ -34,7 +35,7 @@ export class AuthService {
   }
 
   register(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>('/api/auth/register', user);
+    return this.http.post<IUser>(`${environment.apiUrl}/auth/register`, user);
   }
 
   logout() {
